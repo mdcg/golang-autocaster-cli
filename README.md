@@ -31,3 +31,7 @@ MinGW-w64 (Use recommended) or other GCC
 ```
 go build -o autocaster .
 ```
+
+## Config autocaster file
+
+HOTKEY (splitted by space);SLEEP TIME;HOW MANY TIMES
