@@ -1,6 +1,7 @@
 package core
 
 import (
+	"log"
 	"time"
 
 	"github.com/go-vgo/robotgo"
@@ -26,10 +27,16 @@ func runMacro(macro config.Macro) {
 }
 
 func execKeyCombination(hotkeys []string) {
+	var err string
+
 	if len(hotkeys) > 1 {
-		robotgo.KeyTap(hotkeys[0], hotkeys[1:])
+		err = robotgo.KeyTap(hotkeys[0], hotkeys[1:])
 	} else {
-		robotgo.KeyTap(hotkeys[0])
+		err = robotgo.KeyTap(hotkeys[0])
+	}
+
+	if err != "" {
+		log.Fatal(err)
 	}
 }
 
