@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/mdcg/golang-autocaster-cli/config"
+	"github.com/mdcg/golang-autocaster-cli/core"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +16,8 @@ func AutocasterCMD() *cobra.Command {
 		Long:  `Starts autocaster processing from a given configuration file.`,
 		Args:  cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("Test: " + args[0])
+			macros := config.LoadConfig(args[0])
+			core.LoadMacros(macros)
 		},
 	}
 	cmdRun.Flags().BoolVarP(&verbose, "verbose", "v", true, "verbose mode")
