@@ -1,19 +1,18 @@
 package config
 
 import (
-	"bytes"
 	"log"
+	"os"
 )
 
 var (
-	buf           bytes.Buffer
 	WarningLogger *log.Logger
 	InfoLogger    *log.Logger
 	ErrorLogger   *log.Logger
 )
 
 func init() {
-	InfoLogger = log.New(&buf, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
-	ErrorLogger = log.New(&buf, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
-	WarningLogger = log.New(&buf, "WARNING: ", log.Ldate|log.Ltime|log.Lshortfile)
+	InfoLogger = log.New(os.Stderr, "INFO: ", log.Ldate|log.Ltime)
+	ErrorLogger = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime)
+	WarningLogger = log.New(os.Stderr, "WARNING: ", log.Ldate|log.Ltime)
 }

@@ -41,7 +41,7 @@ func AutocasterCMD() *cobra.Command {
 func awaitingProcessing(msg string, sleepTime int) {
 	s := spinner.New(spinner.CharSets[11], 100*time.Millisecond)
 	s.Suffix = fmt.Sprintf(" %v", msg)
-	s.FinalMSG = "Done!"
+	s.FinalMSG = "\nDone!\n"
 
 	s.Start()
 	time.Sleep(time.Duration(sleepTime) * time.Second)
