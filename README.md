@@ -34,4 +34,4 @@ go build -o autocaster .
 
 ## Config autocaster file
 
-HOTKEY (splitted by space);SLEEP TIME;HOW MANY TIMES
+HOTKEY (splitted by space);HOW MANY TIMES;INTERVAL BETEWEEN HOTKEYS;SLEEP TIME

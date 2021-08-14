@@ -2,28 +2,30 @@ package core
 
 import (
 	"log"
+	"math/rand"
 	"time"
 
 	"github.com/go-vgo/robotgo"
 	"github.com/mdcg/golang-autocaster-cli/config"
 )
 
-func LoadMacros(macros []config.Macro) {
-	for _, m := range macros {
-		go runMacro(m)
-	}
+const (
+	MAX_SLEEP_TIME = 5
+)
 
-	runForever()
+func runForever() {
+	for {
+		time.Sleep(time.Hour)
+	}
 }
 
-func runMacro(macro config.Macro) {
-	for {
-		robotgo.Sleep(macro.SleepTime)
-		for t := 0; t < macro.ManyTimes; t++ {
-			execKeyCombination(macro.Hotkey)
-			robotgo.Sleep(1)
-		}
-	}
+func randomSleep(maxInterval int) {
+	rand.Seed(time.Now().UnixNano())
+	n := rand.Intn(maxInterval)
+
+	config.InfoLogger.Printf("Sleeping %d seconds...\n", n)
+
+	time.Sleep(time.Duration(n) * time.Second)
 }
 
 func execKeyCombination(hotkeys []string) {
@@ -40,8 +42,27 @@ func execKeyCombination(hotkeys []string) {
 	}
 }
 
-func runForever() {
+func LoadMacros(macros []config.Macro) {
+	for _, m := range macros {
+		randomSleep(MAX_SLEEP_TIME)
+		go runMacro(m)
+	}
+
+	runForever()
+}
+
+func runMacro(macro config.Macro) {
 	for {
-		time.Sleep(time.Hour)
+		for t := 0; t < macro.ManyTimes; t++ {
+			robotgo.Sleep(macro.IntervalBetweenHotkeys)
+
+			config.InfoLogger.Printf("Hotkey: %v\n", macro.Hotkey)
+
+			execKeyCombination(macro.Hotkey)
+		}
+
+		config.InfoLogger.Printf("Sleeping for %v seconds.\n", macro.SleepTime)
+
+		robotgo.Sleep(macro.SleepTime)
 	}
 }
