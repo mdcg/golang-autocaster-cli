@@ -1,0 +1,26 @@
+[
+    {
+        "hotkey": [
+            "1"
+        ],
+        "many_times": 2,
+        "interval_between_hotkeys": 2,
+        "sleep_time": 20
+    },
+    {
+        "hotkey": [
+            "2"
+        ],
+        "many_times": 4,
+        "interval_between_hotkeys": 0,
+        "sleep_time": 300
+    },
+    {
+        "hotkey": [
+            "3"
+        ],
+        "many_times": 1,
+        "interval_between_hotkeys": 2,
+        "sleep_time": 1200
+    }
+]

@@ -21,11 +21,9 @@ func runForever() {
 
 func randomSleep(maxInterval int) {
 	rand.Seed(time.Now().UnixNano())
-	n := rand.Intn(maxInterval)
-
-	config.InfoLogger.Printf("Sleeping %d seconds...\n", n)
-
-	time.Sleep(time.Duration(n) * time.Second)
+	parsedMaxInterval := rand.Intn(maxInterval)
+	config.InfoLogger.Printf("Sleeping %d seconds...\n", parsedMaxInterval)
+	time.Sleep(time.Duration(parsedMaxInterval) * time.Second)
 }
 
 func execKeyCombination(hotkeys []string) {
@@ -47,7 +45,6 @@ func LoadMacros(macros []config.Macro) {
 		randomSleep(MAX_SLEEP_TIME)
 		go runMacro(m)
 	}
-
 	runForever()
 }
 
@@ -55,14 +52,10 @@ func runMacro(macro config.Macro) {
 	for {
 		for t := 0; t < macro.ManyTimes; t++ {
 			robotgo.Sleep(macro.IntervalBetweenHotkeys)
-
 			config.InfoLogger.Printf("Hotkey: %v\n", macro.Hotkey)
-
 			execKeyCombination(macro.Hotkey)
 		}
-
 		config.InfoLogger.Printf("Sleeping for %v seconds.\n", macro.SleepTime)
-
 		robotgo.Sleep(macro.SleepTime)
 	}
 }
