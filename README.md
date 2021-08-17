@@ -34,4 +34,21 @@ go build -o autocaster .
 
 ## Config autocaster file
 
-HOTKEY (splitted by space);HOW MANY TIMES;INTERVAL BETEWEEN HOTKEYS;SLEEP TIME
+Use JSON file in the following format:
+
+```json
+[
+    {
+        "hotkey": ["ctrl", "alt", "del"],
+        "many_times": 1,
+        "interval_between_hotkeys": 0,
+        "sleep_time": 666
+    },
+    {
+        "hotkey": ["alt", "f4"],
+        "many_times": 1337,
+        "interval_between_hotkeys": 1,
+        "sleep_time": 10
+    },
+]
+```
