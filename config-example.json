@@ -12,7 +12,7 @@
             "2"
         ],
         "many_times": 4,
-        "interval_between_hotkeys": 0,
+        "interval_between_hotkeys": 3,
         "sleep_time": 300
     },
     {
